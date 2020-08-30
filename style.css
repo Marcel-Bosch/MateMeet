@@ -40,3 +40,7 @@ body{
 .event__name {
     margin: 5% 0 0 5%;
 }
+
+.expense {
+    color: #f26d7d;
+}
