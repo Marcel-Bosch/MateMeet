@@ -1,0 +1,42 @@
+
+
+
+body{
+    color: #125547;
+    font-family: 'Alata', sans-serif;
+    background-color: #ffcccc;
+    width: 0;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.box__left {
+    position: fixed;
+    width: 20%;
+    height: 100%;
+    background-color: #bac2ab;
+   
+}
+
+.box__middle {
+    position: fixed;
+    margin: 0 20%;
+    width: 60%;
+    height: 100%;
+    background-color: #ffcccc;
+   
+}
+
+.box__right {
+    position: fixed;
+    margin: 0 80%;
+    width: 20%;
+    height: 100%;
+    background-color: #bac2ab;
+   
+}
+
+.event__name {
+    margin: 5% 0 0 5%;
+}

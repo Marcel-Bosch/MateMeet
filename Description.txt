@@ -1,0 +1,18 @@
+La app crearà un event on es podràn afegir o treure persones. A cada persona se li podràn assignar tasques o afegir despeses. 
+El total de despeses es visualitzarà en pantalla i es podran repartir entre tots els participants de manera que veurem qui
+ha de pagar cada cosa.
+
+EVENT: {
+    Títol 
+    Data
+    Persona organitzadora
+    Assistents: {
+        Assistent 1 {
+            Nom
+            Tasques assignades []
+            Despeses fetes []
+            Quantitat a pagar?
+            Pagament fet? (Boolean)
+            
+        }
+    }
