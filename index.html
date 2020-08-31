@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,26 +9,47 @@
     <script src="index.js"></script>
     <title>MateMeet, the best way to organize your friendly meetings!!</title>
 </head>
+
 <body>
-   
+
     <div class="box__left">
-        
+        <div id="button__box">
+            <button class="button" id="event__btn">+ Event</button> </br>
+            <input class="inputs" type="text" placeholder="Event Name"></input></br>
+            <input class="inputs" type="date" placeholder="dd/mm/yyyy"></input></br>
+            <button class="button" id="person__btn">+ Person</button> </br>
+            <input class="inputs" type="text" placeholder="Name"></input></br>
+            <button class="button" id="task__btn">+ Task</button> </br>
+            <input class="inputs" type="text" placeholder="Task"></input></br>
+            <button class="button" id="expense__btn">+ Expense</button> </br>
+            <select class="inputs" name="Name">
+                <option value="1">exemple01</option>
+                <option value="2">exemple02</option>
+                <option value="3">exemple03</option>
+            </select></br>
+            <input class="inputs" type="number" placeholder="$"></input></br>
+        </div>
     </div>
+
     <div class="box__middle">
-        <p class="event__name">Event name   
-        </br>Total people: 00
-        </br>Total expenses: <span class= expense>00€</span>
+        <p class="event__name">Event name
+            </br>Total people: 00
+            </br>Total expenses: <span class=expense>00€</span>
         </p>
         <section>
-            <ul class= "person__list">
-                <li></li>
+            <ul class="person__list">
+                <li>Person 01 name</li>
+                <li class="task">Task</li>
+                <li class="expense">Expense</li>
+                <li class="expense">pay 00$ to #person</li>
             </ul>
         </section>
     </div>
     <div class="box__right">
-        
+
     </div>
-    
-    
+
+
 </body>
+
 </html>

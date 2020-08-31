@@ -38,9 +38,49 @@ body{
 }
 
 .event__name {
+    font-size: 108%;
     margin: 5% 0 0 5%;
 }
 
 .expense {
     color: #f26d7d;
+}
+
+.task{
+    color: #4d6753;
+}
+.person__list{
+    font-size: 99%;
+    list-style: none;
+    margin: 5% 0 0 5%;
+}
+
+#button__box{
+    margin: 30%;
+    font-size: 130%;
+    text-align: left;
+}
+
+.button{
+    background: none;
+    color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+    outline: inherit;
+    cursor: pointer;
+    }
+
+.inputs{
+    margin: 10px 7px;
+    background: #d9e9bb;
+    width: 100%;
+    padding: 7%;
+    font-size: 55%;
+    color: inherit;
+    border-width: 0px;
+    border-color: #4d6753;
+    border-radius: 5px;
+    outline: inherit;
+    line-height: 100%;
 }
