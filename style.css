@@ -42,6 +42,10 @@ body{
     margin: 5% 0 0 5%;
 }
 
+.person__container{
+    margin: 2% 0 0 10%;
+}
+
 .expense {
     color: #f26d7d;
 }
