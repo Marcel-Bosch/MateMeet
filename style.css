@@ -37,7 +37,7 @@ body{
    
 }
 
-.event__name {
+#event__name {
     font-size: 108%;
     margin: 5% 0 0 5%;
 }
@@ -63,13 +63,24 @@ body{
 
 .button{
     background: none;
+    width: 100%;
+    text-align: left;
     color: inherit;
 	border: none;
-	padding: 0;
+	padding: 0 0 10%;
 	font: inherit;
     outline: inherit;
     cursor: pointer;
+    position: static;
     }
+
+/*.inputs__div{
+    display: none;
+}
+.button:hover + .inputs__div{
+    transition: 2s;
+    display: block;
+}*/
 
 .inputs{
     margin: 10px 7px;
