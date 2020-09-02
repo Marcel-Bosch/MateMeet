@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>MateMeet, the best way to organize your friendly meetings!!</title>
+    <title>MateMeet</title>
 </head>
 
 <body>
@@ -29,11 +29,13 @@
             <button class="button" id="expense__btn">+ Expense</button>
             <div class="inputs__div">
                 <select class="inputs" id="people__list" name="Name">
+                    <!-- 
                     <option value="1">exemple01</option>
                     <option value="2">exemple02</option>
                     <option value="3">exemple03</option>
+                    -->
                 </select>
-                <input class="inputs" type="number" placeholder="$"></input>
+                <input class="inputs" type="number" id="expense__amount" placeholder="€"></input>
             </div>
         </div>
     </div>
@@ -43,7 +45,10 @@
     
     <div class="box__middle">
         <div id="event__name">Insert a new Event
-           
+            <!--
+            </br>Total people: <span id="total__people">0</span>
+            </br>Total expenses: <span class="expense" id="total__expenses">00€</span>
+            -->
         </div>
         <div class="person__container">
         <!-- 

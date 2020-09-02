@@ -1,6 +1,5 @@
 
 
-
 body{
     color: #125547;
     font-family: 'Alata', sans-serif;
@@ -10,13 +9,16 @@ body{
     padding: 0;
     margin: 0;
 }
+::-webkit-scrollbar {
+    width: 0px;
+  }  
 
 .box__left {
     position: fixed;
     width: 20%;
     height: 100%;
     background-color: #bac2ab;
-   
+    overflow-y: scroll;
 }
 
 .box__middle {
@@ -56,7 +58,7 @@ body{
 .person__list{
     font-size: 99%;
     list-style: none;
-    margin: 5% 0 0 5%;
+    margin: 0% 0 0 0%;
 }
 
 #button__box{
