@@ -1,3 +1,13 @@
+const elements = {
+    personCont: document.querySelector('.person__container'),
+    totalPeople: document.querySelector('#total__people'),
+    eventBtn: document.getElementById('event__btn'),
+    nameInput: document.getElementById('name__input'),
+    dateInput: document.getElementById('date__input'),
+    personBtn: document.getElementById('person__btn'),
+    personName: document.getElementById('person__name')
+}
+
 class Event {
     constructor(event, date) {
         this.eventName = event;
@@ -7,23 +17,23 @@ class Event {
     
     addPerson(name){
         this.people.push({name: name});
-        document.querySelector('.person__container').insertAdjacentHTML("beforeend", `
+        elements.personCont.insertAdjacentHTML("beforeend", `
         ${name} </br>`);
         console.log(this.people.length);
-        document.querySelector('#total__people').innerHTML = `${this.people.length}`;
+        elements.totalPeople.innerHTML = `${this.people.length}`;
     }
 
     
 }
-let eventName, actEv, actPer;
+let actEv, actPer;
 const state = {};
 
 
 (createEvent = () =>{
-    let btn = document.getElementById('event__btn');
+    let btn = elements.eventBtn;
     btn.addEventListener('click', function(){
-        eventName = document.getElementById('name__input').value;
-        let eventDate = document.getElementById('date__input').value.split('-').reverse().toString().replace(/,/g,"/");
+        let eventName = elements.nameInput.value;
+        let eventDate = elements.dateInput.value.split('-').reverse().toString().replace(/,/g,"/");
         state[eventName] = new Event(eventName, eventDate);
         (insertEvent = ()=> {
           document.querySelector('#event__name').innerHTML= `${eventName} (${eventDate})
@@ -38,9 +48,10 @@ const state = {};
 })();
 
 (addPerson = () => {
-    let btn = document.getElementById('person__btn');
+    let btn = elements.personBtn;
     btn.addEventListener('click', function(){
-        let personName = document.getElementById('person__name').value;
+        let personName = elements.personName.value;
+
         state[actEv].addPerson(personName);
     })
 })();
