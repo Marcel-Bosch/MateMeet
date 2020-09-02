@@ -4,8 +4,9 @@ class Event {
         this.date = date;
         this.people = [];
     }
+    
     addPerson(name){
-        this.people.push(name);
+        this.people.push({name: name});
         document.querySelector('.person__container').insertAdjacentHTML("beforeend", `
         ${name} </br>`);
         console.log(this.people.length);
@@ -14,33 +15,32 @@ class Event {
 
     
 }
-let newEvent;
-let totalPeople;
+let eventName, actEv, actPer;
+const state = {};
 
-let getEventInfo = (function(){
+
+(createEvent = () =>{
     let btn = document.getElementById('event__btn');
     btn.addEventListener('click', function(){
-        let eventName = document.getElementById('name__input').value;
+        eventName = document.getElementById('name__input').value;
         let eventDate = document.getElementById('date__input').value.split('-').reverse().toString().replace(/,/g,"/");
-        newEvent = new Event(eventName, eventDate);
-        console.log(newEvent);
-        const insertEvent = ()=> {
+        state[eventName] = new Event(eventName, eventDate);
+        (insertEvent = ()=> {
           document.querySelector('#event__name').innerHTML= `${eventName} (${eventDate})
           </br>Total people: <span id="total__people">0</span>
           </br>Total expenses: <span class="expense">00€</span>
           `;
-        }
-        insertEvent();
+        })();
+        state.actualEvent= eventName;
+        actEv = state.actualEvent.toString();
+        console.log(state);
     });
 })();
 
-getPersonInfo = () => {
+(addPerson = () => {
     let btn = document.getElementById('person__btn');
     btn.addEventListener('click', function(){
         let personName = document.getElementById('person__name').value;
-        newEvent.addPerson(personName);
-        console.log(newEvent);
-
+        state[actEv].addPerson(personName);
     })
-};
-getPersonInfo();
+})();
