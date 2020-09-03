@@ -101,3 +101,11 @@ body{
     outline: inherit;
     line-height: 100%;
 }
+.comment{
+    font-size: 80%;
+    color: #79816c
+}
+.comexpense{
+    font-size: 80%;
+    color: #f26d7d;
+}
