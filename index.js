@@ -24,10 +24,10 @@ class Event {
         let nameSpaced = name.replace(/ /g, "_");
         this.people.push({ name: nameSpaced });
         elements.peopleList.insertAdjacentHTML("beforeend",
-        `<option value="${name}">${name}</option>`);
+            `<option value="${name}">${name}</option>`);
         //Add to DOM
         elements.personCont.insertAdjacentHTML("beforeend",
-        `</br><ul class = "person__list" id="${nameSpaced}"><li>${name}<span id="${nameSpaced}__owes"></span></ul>`);
+            `<ul class = "person__list" id="${nameSpaced}"><li>${name}<span id="${nameSpaced}__owes"></span></ul>`);
         document.querySelector('#total__people').innerHTML = `${this.people.length}`;
         if (this.people.length > 1 && this.expenses) {
             this.updateExpenses();
@@ -46,15 +46,14 @@ class Event {
                 i.payment = this.eachPayment;
             };
             if (i.payment < 0) {
-                //Doesn't have to pay
-                inner.innerHTML = `<span class="comment"> (You have to receive ${(i.expenses-this.eachPayment).toFixed(1)}€)</span>`;
+                inner.innerHTML = `<span class="comment"> (You have to receive ${(i.expenses - this.eachPayment).toFixed(1)}€)</span>`;
             } else if (i.payment === 0) {
                 inner.innerHTML = `<span class="comment"> (You don't have to pay)</span>`;
             } else if (i.payment > 0) {
-                if(i.expenses){
-                inner.innerHTML = `<span class="comexpense"> (You have to pay ${(this.eachPayment-i.expenses).toFixed(1)}€)</span>`;
-                }else{
-                inner.innerHTML = `<span class="comexpense"> (You have to pay ${this.eachPayment.toFixed(1)}€)</span>`;
+                if (i.expenses) {
+                    inner.innerHTML = `<span class="comexpense"> (You have to pay ${(this.eachPayment - i.expenses).toFixed(1)}€)</span>`;
+                } else {
+                    inner.innerHTML = `<span class="comexpense"> (You have to pay ${this.eachPayment.toFixed(1)}€)</span>`;
                 }
             }
         });
@@ -76,10 +75,11 @@ const state = {};
         if (eventName && eventDate) {
             state[eventName] = new Event(eventName, eventDate);
             (insertEvent = () => {
-                document.querySelector('#event__name').innerHTML = `${eventName} (${eventDate})
-          </br>Total people: <span id="total__people">0</span>
-          </br>Total expenses: <span class="expense" id="total__expenses">00€</span>
-          `;
+                document.querySelector('#event__name').innerHTML = `<h2>${eventName.toUpperCase()}<span id="date"> (${eventDate})</span></h2>`; 
+                document.querySelector('#event__stats').innerHTML =
+                `</br><img src="./img/cliente.svg" class="icon"> <span id="total__people">0</span>
+                </br><img src="./img/efectivo.svg" class="icon"> <span class="expense" id="total__expenses">00€</span>
+                `;
             })();
             state.actualEvent = eventName;
             actEv = state.actualEvent.toString();
@@ -97,7 +97,7 @@ const state = {};
 //New person
 (addPerson = () => {
     let btn = elements.personBtn;
-    btn.addEventListener('click', function () {
+    addPersonName = () => {
         let personName = elements.personName.value;
         if (actEv && personName) {
             state[actEv].addPerson(personName);
@@ -107,6 +107,14 @@ const state = {};
         } else if (!personName) {
             alert('Please insert a name')
         };
+    }
+    elements.personName.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter'){
+        addPersonName();
+        };
+    });
+    btn.addEventListener('click', function () {
+        addPersonName();
     })
 })();
 
@@ -125,8 +133,8 @@ const state = {};
         } else {
             perObj.expenses = expAmount;
         };
-        if(!perObj.expArray){
-        perObj.expArray = [];
+        if (!perObj.expArray) {
+            perObj.expArray = [];
         };
         perObj.expArray.push(expAmount);
         //4. Add to DOM
