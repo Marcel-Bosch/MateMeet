@@ -11,6 +11,9 @@ const elements = {
     expenseAmount: document.getElementById('expense__amount'),
 };
 
+let actEv, btn;
+const state = {};
+
 //Event class
 class Event {
     constructor(event, date) {
@@ -20,14 +23,14 @@ class Event {
     }
 
     addPerson(name) {
-        //Add to expenses people list
         let nameSpaced = name.replace(/ /g, "_");
+        //Add to expenses people list
         this.people.push({ name: nameSpaced });
         elements.peopleList.insertAdjacentHTML("beforeend",
             `<option value="${name}">${name}</option>`);
         //Add to DOM
         elements.personCont.insertAdjacentHTML("beforeend",
-            `<ul class = "person__list" id="${nameSpaced}"><li>${name}<span id="${nameSpaced}__owes"></span></ul>`);
+            `<div class = "person__list" id="${nameSpaced}">${name}<span id="${nameSpaced}__owes"></span><button class="delete__button" id="delete__${nameSpaced}">D</div>`);
         document.querySelector('#total__people').innerHTML = `${this.people.length}`;
         if (this.people.length > 1 && this.expenses) {
             this.updateExpenses();
@@ -63,21 +66,18 @@ class Event {
 
 };
 
-let actEv;
-const state = {};
-
 //New event
 (createEvent = () => {
-    let btn = elements.eventBtn;
+    btn = elements.eventBtn;
     btn.addEventListener('click', function () {
         let eventName = elements.nameInput.value;
         let eventDate = elements.dateInput.value.split('-').reverse().toString().replace(/,/g, "/");
         if (eventName && eventDate) {
             state[eventName] = new Event(eventName, eventDate);
             (insertEvent = () => {
-                document.querySelector('#event__name').innerHTML = `<h2>${eventName.toUpperCase()}<span id="date"> (${eventDate})</span></h2>`; 
+                document.querySelector('#event__name').innerHTML = `<h2>${eventName.toUpperCase()}<span id="date"> (${eventDate})</span></h2>`;
                 document.querySelector('#event__stats').innerHTML =
-                `</br><img src="./img/cliente.svg" class="icon"> <span id="total__people">0</span>
+                    `</br><img src="./img/cliente.svg" class="icon"> <span id="total__people">0</span>
                 </br><img src="./img/efectivo.svg" class="icon"> <span class="expense" id="total__expenses">00€</span>
                 `;
             })();
@@ -96,12 +96,18 @@ const state = {};
 
 //New person
 (addPerson = () => {
-    let btn = elements.personBtn;
+    btn = elements.personBtn;
     addPersonName = () => {
         let personName = elements.personName.value;
         if (actEv && personName) {
-            state[actEv].addPerson(personName);
-            elements.personName.value = '';
+            //Check if the name is already on the list
+            let perObj = state[actEv].people.find(o => o.name == personName.replace(/ /g, "_"));
+            if (perObj) {
+                alert('This name is already on the list');
+            } else {
+                state[actEv].addPerson(personName);
+                elements.personName.value = '';
+            };
         } else if (!actEv) {
             alert('No event selected!')
         } else if (!personName) {
@@ -109,8 +115,8 @@ const state = {};
         };
     }
     elements.personName.addEventListener('keypress', (e) => {
-        if(e.key === 'Enter'){
-        addPersonName();
+        if (e.key === 'Enter') {
+            addPersonName();
         };
     });
     btn.addEventListener('click', function () {
@@ -120,7 +126,7 @@ const state = {};
 
 //New expense
 (addExpense = () => {
-    let btn = elements.expenseBtn;
+    btn = elements.expenseBtn;
     btn.addEventListener('click', function () {
         //1. Capture value on select
         let selectedName = elements.peopleList.value.replace(/ /g, "_");
@@ -151,3 +157,12 @@ const state = {};
         state[actEv].updateExpenses();
     });
 })();
+
+//Delete person
+// (deleteperson = () => {
+//     btn = document.getElementsByClassName('delete__button');
+//     if(btn){
+//     btn.addEventListener('click', function(){
+//         btn.parentNode.removeChild();
+//     })}
+// })();
