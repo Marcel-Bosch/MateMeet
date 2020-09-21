@@ -1,5 +1,5 @@
 # MateMeet is my starter project in javascript.
-When you organize a meeting with family and friends you allways end up doing maths on pieces of paper at the end of the event trying to figure out who has to pay, who owes money to who, how many money we expend in total...
+When you organize a meeting with family and friends you allways end up doing maths on pieces of paper at the end of the event trying to figure out who has to pay, who owes money to who, how much money we expend in total...
 My little app tries to solve this mess calculating everything for you.
 
 You can create an event and add people to it. 
