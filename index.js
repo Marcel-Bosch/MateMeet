@@ -30,7 +30,7 @@ class Event {
             `<option value="${name}">${name}</option>`);
         //Add to DOM
         elements.personCont.insertAdjacentHTML("beforeend",
-            `<div class = "person__list" id="${nameSpaced}">${name}<span id="${nameSpaced}__owes"></span><button class="delete__button" id="delete__${nameSpaced}">D</div>`);
+            `<div class = "person__list" id="${nameSpaced}">${name}<span id="${nameSpaced}__owes"></span></div>`);
         document.querySelector('#total__people').innerHTML = `${this.people.length}`;
         if (this.people.length > 1 && this.expenses) {
             this.updateExpenses();
