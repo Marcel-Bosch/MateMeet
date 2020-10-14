@@ -1,14 +1,15 @@
 //DOM elements
 const elements = {
-    personCont: document.querySelector('.person__container'),
-    eventBtn: document.getElementById('event__btn'),
-    nameInput: document.getElementById('name__input'),
-    dateInput: document.getElementById('date__input'),
-    personBtn: document.getElementById('person__btn'),
-    personName: document.getElementById('person__name'),
-    peopleList: document.getElementById('people__list'),
-    expenseBtn: document.getElementById('expense__btn'),
-    expenseAmount: document.getElementById('expense__amount'),
+    dateInput:      document.getElementById('date__input'),
+    expenseAmount:  document.getElementById('expense__amount'),
+    expenseBtn:     document.getElementById('expense__btn'),
+    eventBtn:       document.getElementById('event__btn'),
+    nameInput:      document.getElementById('name__input'),
+    peopleList:     document.getElementById('people__list'),
+    personBtn:      document.getElementById('person__btn'),
+    personCont:     document.querySelector('.person__container'),
+    personName:     document.getElementById('person__name'),
+
 };
 
 let actEv, btn;
@@ -30,7 +31,7 @@ class Event {
             `<option value="${name}">${name}</option>`);
         //Add to DOM
         elements.personCont.insertAdjacentHTML("beforeend",
-            `<div class = "person__list" id="${nameSpaced}">${name}<span id="${nameSpaced}__owes"></span></div>`);
+            `<div class = "person__list" id="${nameSpaced}">${name}<span id="${nameSpaced}__owes"></span><i class="trash fas fa-trash-alt"></i></div>`);
         document.querySelector('#total__people').innerHTML = `${this.people.length}`;
         if (this.people.length > 1 && this.expenses) {
             this.updateExpenses();
@@ -78,7 +79,7 @@ class Event {
                 document.querySelector('#event__name').innerHTML = `<h2>${eventName.toUpperCase()}<span id="date"> (${eventDate})</span></h2>`;
                 document.querySelector('#event__stats').innerHTML =
                     `</br><img src="./img/cliente.svg" class="icon"> <span id="total__people">0</span>
-                </br><img src="./img/efectivo.svg" class="icon"> <span class="expense" id="total__expenses">00€</span>
+                     </br><img src="./img/efectivo.svg" class="icon"> <span class="expense" id="total__expenses">00€</span>
                 `;
             })();
             state.actualEvent = eventName;
@@ -159,10 +160,13 @@ class Event {
 })();
 
 //Delete person
-// (deleteperson = () => {
-//     btn = document.getElementsByClassName('delete__button');
-//     if(btn){
-//     btn.addEventListener('click', function(){
-//         btn.parentNode.removeChild();
-//     })}
-// })();
+(deleteperson = () => {
+    
+    document.addEventListener('click', e=> {
+        if(e.target.matches('.trash')){
+             console.log(e.returnValue);
+
+        }
+    })
+
+})();

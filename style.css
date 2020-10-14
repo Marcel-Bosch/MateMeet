@@ -1,24 +1,25 @@
-
-body{
-    background-image: url("./img/wall.jpg");
-    color: #125547;
+body {
+    color: #ffffff;
     font-family: 'Alata', sans-serif;
-    background-color: #ffcccc;
+    background-color: #242424;
     width: 0;
     border: 0;
     padding: 0;
     margin: 0;
 }
+
 ::-webkit-scrollbar {
     width: 0px;
-  }  
-.icon{
+}
+
+.icon {
     width: 8%;
     height: 8%;
-    color:  #125547;
+    color: #b0b3b2;
     padding-top: 1%;
     padding-right: 1%;
 }
+
 .box__left {
     position: fixed;
     width: 20%;
@@ -28,7 +29,7 @@ body{
 
 .box__middle {
     position: fixed;
-    margin: 0 20%;
+    margin: 0 20% 0 20%;
     width: 60%;
     height: 100%;
     max-height: 100%;
@@ -37,10 +38,9 @@ body{
 
 .box__right {
     position: fixed;
-    margin: 0 80%;
+    margin-left: 80%;
     width: 20%;
     height: 100%;
-   
 }
 
 #event__name {
@@ -48,13 +48,12 @@ body{
     margin: 5% 0 0 5%;
 }
 
-#date{
+#date {
     font-size: 50%;
     padding-left: 2%;
-
 }
 
-.person__container{
+.person__container {
     margin: 2% 0 0 10%;
     width: 60%;
     height: 80%;
@@ -64,10 +63,11 @@ body{
     color: #f26d7d;
 }
 
-.task{
+.task {
     color: #4d6753;
 }
-.person__list{
+
+.person__list {
     max-height: 100%;
     padding: 2%;
     font-size: 99%;
@@ -75,45 +75,60 @@ body{
     margin: 1% 2%;
 }
 
-#button__box{
-    margin: 30%;
+#button__box {
+    padding: 40% 0% 0% 30%;
     font-size: 130%;
     text-align: left;
 }
 
-.button{
+.button {
     background: none;
     width: 100%;
-    font-size: 90% !important;
+    font-size: 80% !important;
     text-align: left;
     color: inherit;
-	border: none;
-	padding: 10% 0 0%;
-	font: inherit;
+    border: none;
+    padding: 10% 0 0%;
+    font: inherit;
     outline: inherit;
     cursor: pointer;
     position: static;
-    }
+    transition-duration: 0.3s;
+}
 
-.inputs{
-    margin: 10px 7px;
+.trash{
+    font-size: 10px;
+    margin-left: 1rem;
+    transition: 0.3s;
+}
+
+.trash:hover{
+    font-size: 15px;
+    cursor: pointer;
+}
+
+input {
+    box-sizing: border-box
+}
+
+.inputs {
+    size: 100%;
     background: #d9e9bb81;
     box-shadow: 1px 1px 2px black;
-    width: 100%;
+    width: 99%;
     padding: 7%;
     font-size: 55%;
     color: inherit;
     border-width: 0px;
-    border-color: #4d6753;
     border-radius: 5px;
-    outline: inherit;
-    line-height: 100%;
 }
-.comment{
+
+.comment {
     font-size: 80%;
     color: #79816c
 }
-.comexpense{
+
+.comexpense {
     font-size: 80%;
     color: #f26d7d;
 }

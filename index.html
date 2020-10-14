@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ba11aaf8ed.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <title>MateMeet</title>
 </head>
@@ -13,31 +14,33 @@
 
     <div class="box__left">
         <div id="button__box">
-            <button class="button" id="event__btn">+ Event</button>
-            <div class="inputs__div">
-                <input class="inputs" id="name__input" type="text" placeholder="Event Name"></input>
-                <input class="inputs" id="date__input" type="date" placeholder="dd/mm/yyyy"></input>
+            <div class="menu__box">
+                <button class="button" id="event__btn">Event</button>
+                <div class="inputs__div">
+                    <input class="inputs" id="name__input" type="text" placeholder="Event Name"></input>
+                    <input class="inputs" id="date__input" type="date" placeholder="dd/mm/yyyy"></input>
+                </div>
             </div>
-            <button class="button" id="person__btn">+ Person</button>
-            <div class="inputs__div">
-                <input class="inputs" id="person__name" type="text" placeholder="Name"></input>
-                <!--
+            <div class="menu__box">
+                <button class="button" id="person__btn">Person</button>
+                <div class="inputs__div">
+                    <input class="inputs" id="person__name" type="text" placeholder="Name"></input>
+                    <!--
+                    </div>
+                    <button class="button" id="task__btn">+ Task</button>
+                    <div class="inputs__div">   
+                    <input class="inputs" type="text" placeholder="Task"></input>
+                     -->
+                </div>
             </div>
-            <button class="button" id="task__btn">+ Task</button>
-            <div class="inputs__div">   
-                <input class="inputs" type="text" placeholder="Task"></input>
-            -->
-            </div>
-            <button class="button" id="expense__btn">+ Expense</button>
-            <div class="inputs__div">
-                <select class="inputs" id="people__list" name="Name">
-                    <!-- 
-                    <option value="1">exemple01</option>
-                    <option value="2">exemple02</option>
-                    <option value="3">exemple03</option>
-                    -->
-                </select>
-                <input class="inputs" type="number" id="expense__amount" placeholder="€"></input>
+            <div class="menu__box">
+                <button class="button" id="expense__btn">Expense</button>
+                <div class="inputs__div">
+                    <select class="inputs" id="people__list" name="Name">
+                        <!-- Names are added here -->
+                    </select>
+                    <input class="inputs" type="number" id="expense__amount" placeholder="€"></input>
+                </div>
             </div>
         </div>
     </div>
@@ -46,23 +49,18 @@
         <div id="event__name">Insert a new Event
             <!--
             </br>Total people: <span id="total__people">0</span>
-        </br>Total expenses: <span class="expense" id="total__expenses">00€</span>
-    -->
+            </br>Total expenses: <span class="expense" id="total__expenses">00€</span>
+             -->
         </div>
         <div class="person__container">
-            <!-- 
-        <ul class="person__list">
-            <li>Person 01 name</li>
-            <li class="task">Task</li>
-            <li class="expense">Expense</li>
-        </ul> 
-    -->
+            <!-- people will be added here    -->
         </div>
     </div>
     </div>
     <div class="box__right">
         <div id="event__stats">
         </div>
+    </div>
 
 </body>
 <script src="index.js"></script>
