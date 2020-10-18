@@ -1,19 +1,21 @@
+
 //DOM elements
 const elements = {
-    dateInput:      document.getElementById('date__input'),
-    expenseAmount:  document.getElementById('expense__amount'),
-    expenseBtn:     document.getElementById('expense__btn'),
-    eventBtn:       document.getElementById('event__btn'),
-    nameInput:      document.getElementById('name__input'),
-    peopleList:     document.getElementById('people__list'),
-    personBtn:      document.getElementById('person__btn'),
-    personCont:     document.querySelector('.person__container'),
-    personName:     document.getElementById('person__name'),
+    dateInput: document.getElementById('date__input'),
+    expenseAmount: document.getElementById('expense__amount'),
+    expenseBtn: document.getElementById('expense__btn'),
+    eventBtn: document.getElementById('event__btn'),
+    nameInput: document.getElementById('name__input'),
+    peopleList: document.getElementById('people__list'),
+    personBtn: document.getElementById('person__btn'),
+    personCont: document.querySelector('.person__container'),
+    personName: document.getElementById('person__name'),
 
 };
-
 let actEv, btn;
 const state = {};
+
+
 
 //Event class
 class Event {
@@ -32,10 +34,14 @@ class Event {
         //Add to DOM
         elements.personCont.insertAdjacentHTML("beforeend",
             `<div class = "person__list" id="${nameSpaced}">${name}<span id="${nameSpaced}__owes"></span><i class="trash fas fa-trash-alt"></i></div>`);
-        document.querySelector('#total__people').innerHTML = `${this.people.length}`;
+        this.updatePeople();
         if (this.people.length > 1 && this.expenses) {
             this.updateExpenses();
         };
+    }
+
+    updatePeople() {
+        document.querySelector('#total__people').innerHTML = `${this.people.length}`;
     }
 
     updateExpenses() {
@@ -161,11 +167,20 @@ class Event {
 
 //Delete person
 (deleteperson = () => {
-    
-    document.addEventListener('click', e=> {
-        if(e.target.matches('.trash')){
-             console.log(e.returnValue);
 
+    document.addEventListener('click', e => {
+        if (e.target.matches('.trash')) {
+            //Remove from DOM
+            let Id = e.target.parentNode.id;
+            let child = e.target.parentNode;
+            document.getElementById(Id).parentElement.removeChild(child);
+            //Remove from inputs list
+
+            //Remove from Event Object 
+            let i = (state[actEv].people.findIndex(o => o.name == Id));
+            state[actEv].people.splice(i, 1); 
+            //Update the number of people
+            state[actEv].updatePeople();
         }
     })
 
