@@ -29,8 +29,9 @@ class Event {
         let nameSpaced = name.replace(/ /g, "_");
         //Add to expenses people list
         this.people.push({ name: nameSpaced });
+        //Add to options on the left menu
         elements.peopleList.insertAdjacentHTML("beforeend",
-            `<option value="${name}">${name}</option>`);
+            `<option value="${name}" id="${nameSpaced}__opt">${name}</option>`);
         //Add to DOM
         elements.personCont.insertAdjacentHTML("beforeend",
             `<div class = "person__list" id="${nameSpaced}">${name}<span id="${nameSpaced}__owes"></span><i class="trash fas fa-trash-alt"></i></div>`);
@@ -170,17 +171,31 @@ class Event {
 
     document.addEventListener('click', e => {
         if (e.target.matches('.trash')) {
-            //Remove from DOM
-            let Id = e.target.parentNode.id;
-            let child = e.target.parentNode;
-            document.getElementById(Id).parentElement.removeChild(child);
-            //Remove from inputs list
+            const Id = e.target.parentNode.id;
+            let confirmation = confirm(`Are you sure you want to delete ${Id}?`);
 
-            //Remove from Event Object 
-            let i = (state[actEv].people.findIndex(o => o.name == Id));
-            state[actEv].people.splice(i, 1); 
-            //Update the number of people
-            state[actEv].updatePeople();
+            if (confirmation) {
+                //Check index of that person on the array
+                const i = (state[actEv].people.findIndex(o => o.name == Id));
+                //Remove expenses of that person
+                let exp = state[actEv].people[i].expenses;
+                state[actEv].expenses -= exp;
+                //Remove from inputs list   
+                let opt = document.getElementById(Id + '__opt'); 
+                opt.parentElement.removeChild(opt);
+                //Update expenses
+                if (state[actEv].people[i].expenses != 0) {
+                    state[actEv].updateExpenses();
+                }
+                //Remove from Event Object 
+                state[actEv].people.splice(i, 1);
+                //Remove from DOM
+                const child = e.target.parentNode;
+                document.getElementById(Id).parentElement.removeChild(child);
+                //Update the number of people
+                state[actEv].updatePeople();
+            }
+
         }
     })
 
