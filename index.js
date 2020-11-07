@@ -1,94 +1,27 @@
 
-//DOM elements
-const elements = {
-    dateInput: document.getElementById('date__input'),
-    expenseAmount: document.getElementById('expense__amount'),
-    expenseBtn: document.getElementById('expense__btn'),
-    eventBtn: document.getElementById('event__btn'),
-    nameInput: document.getElementById('name__input'),
-    peopleList: document.getElementById('people__list'),
-    personBtn: document.getElementById('person__btn'),
-    personCont: document.querySelector('.person__container'),
-    personName: document.getElementById('person__name'),
-
-};
+import { Event } from "./event.js";
+import { elements } from "./elements.js";
+import { insertEventOnDom, insertExpenseOnDom } from "./view.js";
+import { addPerson } from "./manage.js";
 let actEv, btn;
 const state = {};
 
 
 
-//Event class
-class Event {
-    constructor(event, date) {
-        this.eventName = event;
-        this.date = date;
-        this.people = [];
-    }
-
-    addPerson(name) {
-        let nameSpaced = name.replace(/ /g, "_");
-        //Add to expenses people list
-        this.people.push({ name: nameSpaced });
-        //Add to options on the left menu
-        elements.peopleList.insertAdjacentHTML("beforeend",
-            `<option value="${name}" id="${nameSpaced}__opt">${name}</option>`);
-        //Add to DOM
-        elements.personCont.insertAdjacentHTML("beforeend",
-            `<div class = "person__list" id="${nameSpaced}">${name}<span id="${nameSpaced}__owes"></span><i class="trash fas fa-trash-alt"></i></div>`);
-        this.updatePeople();
-        if (this.people.length > 1 && this.expenses) {
-            this.updateExpenses();
-        };
-    }
-
-    updatePeople() {
-        document.querySelector('#total__people').innerHTML = `${this.people.length}`;
-    }
-
-    updateExpenses() {
-        this.eachPayment = this.expenses / this.people.length;
-        document.querySelector('#total__expenses').innerHTML = `-${this.expenses}€ (${this.eachPayment.toFixed(1)}€ each)`;
-        //Calculate how much has to pay each person
-        this.people.forEach(i => {
-            let inner = document.querySelector(`#${i.name}__owes`);
-            if (i.expenses) {
-                i.payment = this.eachPayment - i.expenses;
-            } else if (!i.expenses) {
-                i.payment = this.eachPayment;
-            };
-            if (i.payment < 0) {
-                inner.innerHTML = `<span class="comment"> (You have to receive ${(i.expenses - this.eachPayment).toFixed(1)}€)</span>`;
-            } else if (i.payment === 0) {
-                inner.innerHTML = `<span class="comment"> (You don't have to pay)</span>`;
-            } else if (i.payment > 0) {
-                if (i.expenses) {
-                    inner.innerHTML = `<span class="comexpense"> (You have to pay ${(this.eachPayment - i.expenses).toFixed(1)}€)</span>`;
-                } else {
-                    inner.innerHTML = `<span class="comexpense"> (You have to pay ${this.eachPayment.toFixed(1)}€)</span>`;
-                }
-            }
-        });
-
-    }
-
-
-};
+createEvent();
+deleteperson();
+addExpense();
+addPerson(btn, actEv);
 
 //New event
-(createEvent = () => {
+function createEvent() {
     btn = elements.eventBtn;
     btn.addEventListener('click', function () {
         let eventName = elements.nameInput.value;
         let eventDate = elements.dateInput.value.split('-').reverse().toString().replace(/,/g, "/");
         if (eventName && eventDate) {
             state[eventName] = new Event(eventName, eventDate);
-            (insertEvent = () => {
-                document.querySelector('#event__name').innerHTML = `<h2>${eventName.toUpperCase()}<span id="date"> (${eventDate})</span></h2>`;
-                document.querySelector('#event__stats').innerHTML =
-                    `</br><img src="./img/cliente.svg" class="icon"> <span id="total__people">0</span>
-                     </br><img src="./img/efectivo.svg" class="icon"> <span class="expense" id="total__expenses">00€</span>
-                `;
-            })();
+            insertEventOnDom(eventName, eventDate);
             state.actualEvent = eventName;
             actEv = state.actualEvent.toString();
             elements.nameInput.value = '';
@@ -100,40 +33,11 @@ class Event {
             alert('Missing the date!');
         }
     });
-})();
+};
 
-//New person
-(addPerson = () => {
-    btn = elements.personBtn;
-    addPersonName = () => {
-        let personName = elements.personName.value;
-        if (actEv && personName) {
-            //Check if the name is already on the list
-            let perObj = state[actEv].people.find(o => o.name == personName.replace(/ /g, "_"));
-            if (perObj) {
-                alert('This name is already on the list');
-            } else {
-                state[actEv].addPerson(personName);
-                elements.personName.value = '';
-            };
-        } else if (!actEv) {
-            alert('No event selected!')
-        } else if (!personName) {
-            alert('Please insert a name')
-        };
-    }
-    elements.personName.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            addPersonName();
-        };
-    });
-    btn.addEventListener('click', function () {
-        addPersonName();
-    })
-})();
 
 //New expense
-(addExpense = () => {
+function addExpense() {
     btn = elements.expenseBtn;
     btn.addEventListener('click', function () {
         //1. Capture value on select
@@ -151,9 +55,8 @@ class Event {
             perObj.expArray = [];
         };
         perObj.expArray.push(expAmount);
-        //4. Add to DOM
-        document.getElementById(`${selectedName}`).insertAdjacentHTML('beforeend',
-            `<li class="expense">-${expAmount}€</li>`);
+
+        insertExpenseOnDom(selectedName, expAmount);
         //5. Update total expenses
         if (state[actEv].expenses) {
             state[actEv].expenses += expAmount;
@@ -164,10 +67,10 @@ class Event {
         //6. Update each payment
         state[actEv].updateExpenses();
     });
-})();
+};
 
 //Delete person
-(deleteperson = () => {
+function deleteperson() {
 
     document.addEventListener('click', e => {
         if (e.target.matches('.trash')) {
@@ -181,7 +84,7 @@ class Event {
                 let exp = state[actEv].people[i].expenses;
                 state[actEv].expenses -= exp;
                 //Remove from inputs list   
-                let opt = document.getElementById(Id + '__opt'); 
+                let opt = document.getElementById(Id + '__opt');
                 opt.parentElement.removeChild(opt);
                 //Update expenses
                 if (state[actEv].people[i].expenses != 0) {
@@ -199,4 +102,4 @@ class Event {
         }
     })
 
-})();
+};
