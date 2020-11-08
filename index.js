@@ -3,15 +3,15 @@ import { Event } from "./event.js";
 import { elements } from "./elements.js";
 import { insertEventOnDom, insertExpenseOnDom } from "./view.js";
 import { addPerson } from "./manage.js";
-let actEv, btn;
-const state = {};
+export let actEv, btn;
+export const state = {};
 
 
 
 createEvent();
 deleteperson();
 addExpense();
-addPerson(btn, actEv);
+addPerson();
 
 //New event
 function createEvent() {

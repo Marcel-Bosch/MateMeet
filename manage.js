@@ -1,8 +1,9 @@
 import { elements } from "./elements.js";
+import {state, actEv, btn} from "./index.js"
 
 // ---- Manage People ---- \\
-export function addPerson (btn, actEv) {
-    btn = elements.personBtn;
+export function addPerson () {
+    let btn = elements.personBtn;
     function addPersonName () {
         let personName = elements.personName.value;
         if (actEv && personName) {
