@@ -1,7 +1,8 @@
 
-import { Event } from "./event.js";
+import { Event } from "./classes.js";
 import { elements } from "./elements.js";
 import { insertEventOnDom, insertExpenseOnDom, insertPersonOnDom } from "./view.js";
+import { processPersonName } from "./manage.js";
 export let actEv;
 export const state = {};
 
@@ -71,44 +72,16 @@ function addExpense() {
 };
 
 // Add person 
-function addPerson () {
-    btn = elements.personBtn;
-    function addPersonName () {
-        let personName = elements.personName.value;
-        if (actEv && personName) {
-            //Check if the name is already on the list
-            let perObj = state[actEv].people.find(o => o.name == personName.replace(/ /g, "_"));
-            if (perObj) {
-                alert('This name is already on the list');
-            } else {
-                let nameSpaced = name.replace(/ /g, "_");
-                //Add to expenses people list
-                state[actEv].people.push({ name: nameSpaced });
-                insertPersonOnDom(name,nameSpaced)
-                
-                state[actEv].updatePeople();
-                if (state[actEv].people.length > 1 && state[actEv].expenses) {
-                    state[actEv].updateExpenses();
-                };
-                elements.personName.value = '';
-            };
-        } else if (!actEv) {
-            alert('No event selected!')
-        } else if (!personName) {
-            alert('Please insert a name')
-        };
-    }
-
+function addPerson() {
     elements.personName.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
-            addPersonName();
+            processPersonName();
         };
     });
-    btn.addEventListener('click', function () {
-        addPersonName();
+    elements.personBtn.addEventListener('click', function () {
+        processPersonName();
     })
 }
-addPerson();
 
 
 //Delete person
@@ -139,6 +112,7 @@ function deleteperson() {
                 document.getElementById(Id).parentElement.removeChild(child);
                 //Update the number of people
                 state[actEv].updatePeople();
+                console.log(state);
             }
 
         }

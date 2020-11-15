@@ -1,4 +1,3 @@
-import { insertPersonOnDom } from "./view.js";
 export class Event {
     constructor(event, date) {
         this.eventName = event;
@@ -7,8 +6,6 @@ export class Event {
         this.eachPayment = 0;
         this.expenses = 0;
     }
-
-
 
     updatePeople() {
         document.querySelector('#total__people').innerHTML = `${this.people.length}`;
@@ -41,4 +38,12 @@ export class Event {
     }
 
 
+}
+export class Person {
+    constructor (name){
+        this.name = name;
+        this.expArray = [];
+        this.expenses = 0;
+        this.payment = 0;
+    }
 }
