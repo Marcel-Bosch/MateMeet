@@ -1,77 +1,37 @@
 
-import { Event } from "./classes.js";
 import { elements } from "./elements.js";
-import { insertEventOnDom, insertExpenseOnDom, insertPersonOnDom } from "./view.js";
-import { processPersonName } from "./manage.js";
-export let actEv;
-export const state = {};
-
-let btn;
-
-
+import { updateExpensesOnDom } from "./view.js";
+import { processPersonName, updateExpensesData, processExpense, processEvent, actEv, state } from "./manage.js";
 
 createEvent();
 deleteperson();
 addExpense();
 addPerson();
 
+
 //New event
 function createEvent() {
-    btn = elements.eventBtn;
-    btn.addEventListener('click', function () {
-        let eventName = elements.nameInput.value;
-        let eventDate = elements.dateInput.value.split('-').reverse().toString().replace(/,/g, "/");
-        if (eventName && eventDate) {
-            state[eventName] = new Event(eventName, eventDate);
-            insertEventOnDom(eventName, eventDate);
-            state.actualEvent = eventName;
-            actEv = state.actualEvent.toString();
-            elements.nameInput.value = '';
-            elements.dateInput.value = '';
-            console.log(state);
-        } else if (eventDate && !eventName) {
-            alert('Missing the name!');
-        } else if (eventName && !eventDate) {
-            alert('Missing the date!');
-        }
+    elements.eventBtn.addEventListener('click', function () {
+        processEvent();
     });
 };
 
 
 //New expense
 function addExpense() {
-    btn = elements.expenseBtn;
-    btn.addEventListener('click', function () {
-        //1. Capture value on select
-        let selectedName = elements.peopleList.value.replace(/ /g, "_");
-        //2. Capture expense
-        let expAmount = parseFloat(elements.expenseAmount.value);
-        //3. Add to object
-        let perObj = state[actEv].people.find(o => o.name == selectedName);
-        if (perObj.expenses) {
-            perObj.expenses += expAmount;
-        } else {
-            perObj.expenses = expAmount;
-        };
-        if (!perObj.expArray) {
-            perObj.expArray = [];
-        };
-        perObj.expArray.push(expAmount);
-
-        insertExpenseOnDom(selectedName, expAmount);
-        //5. Update total expenses
-        if (state[actEv].expenses) {
-            state[actEv].expenses += expAmount;
-        } else {
-            state[actEv].expenses = expAmount;
-        };
-        console.log(state[actEv]);
-        //6. Update each payment
-        state[actEv].updateExpenses();
+    elements.expenseBtn.addEventListener('click', () => {
+        processExpense();
+    }
+    );
+    elements.expenseAmount.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            processExpense();
+        }
     });
 };
 
-// Add person 
+
+//New person 
 function addPerson() {
     elements.personName.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
@@ -101,18 +61,16 @@ function deleteperson() {
                 //Remove from inputs list   
                 let opt = document.getElementById(Id + '__opt');
                 opt.parentElement.removeChild(opt);
-                //Update expenses
-                if (state[actEv].people[i].expenses != 0) {
-                    state[actEv].updateExpenses();
-                }
                 //Remove from Event Object 
                 state[actEv].people.splice(i, 1);
+                //Update expenses
+                updateExpensesData();
+                updateExpensesOnDom();
                 //Remove from DOM
                 const child = e.target.parentNode;
                 document.getElementById(Id).parentElement.removeChild(child);
                 //Update the number of people
                 state[actEv].updatePeople();
-                console.log(state);
             }
 
         }

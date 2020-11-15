@@ -124,11 +124,13 @@ input {
 }
 
 .comment {
-    font-size: 80%;
+    font-size: 90%;
+    margin-left: 9px;
     color: #79816c
 }
 
 .comexpense {
-    font-size: 80%;
+    font-size: 90%;
+    margin-left: 9px;
     color: #f26d7d;
 }

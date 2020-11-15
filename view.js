@@ -1,4 +1,5 @@
 import { elements } from "./elements.js";
+import { state, actEv } from "./manage.js";
 
 
 // ---- Event .... \\
@@ -10,19 +11,35 @@ export function insertEventOnDom(eventName, eventDate) {
     `;
 };
 
+
 // ---- Person ---- \\
-export function insertPersonOnDom(name, nameSpaced) {
+export function insertPersonOnDom(name, id) {
     // Insert on options to add expenses
     elements.peopleList.insertAdjacentHTML("beforeend",
-        `<option value="${name}" id="${nameSpaced}__opt">${name}</option>`);
+        `<option value="${name}" id="${id}__opt">${name}</option>`);
     //Add to DOM
     elements.personCont.insertAdjacentHTML("beforeend",
-        `<div class = "person__list" id="${nameSpaced}">${name}<span id="${nameSpaced}__owes"></span><i class="trash fas fa-trash-alt"></i></div>`);
+        `<div class = "person__list" id="${id}">${name}<span id="${id}__owes"></span><i class="trash fas fa-trash-alt"></i></div>`);
 }
 
-// ---- Expense ---- \\
 
-export function insertExpenseOnDom(selectedName, expAmount){
+// ---- Expenses ---- \\
+export function insertExpenseOnDom(selectedName, expAmount) {
     document.getElementById(`${selectedName}`).insertAdjacentHTML('beforeend',
-    `<li class="expense">-${expAmount}€</li>`);
+        `<li class="expense">-${expAmount}€</li>`);
+}
+
+export function updateExpensesOnDom() {
+    document.querySelector('#total__expenses').innerHTML = `-${state[actEv].expenses}€ (${state[actEv].eachPayment.toFixed(1)}€ each)`;
+
+    state[actEv].people.forEach(i => {
+        let inner = document.querySelector(`#${i.id}__owes`);
+        if (i.payment < 0) {
+            inner.innerHTML = `<span class="comment"><i class="fas fa-hand-holding-usd"></i> ${(i.expenses - state[actEv].eachPayment).toFixed(1)}€</span>`;
+        } else if (i.payment == 0) {
+            inner.innerHTML = `<span class="comment"><i class="fas fa-thumbs-up"></i></span>`;
+        } else if (i.payment > 0) {
+            inner.innerHTML = `<span class="comexpense"><i class="fas fa-tired"></i> -${(i.payment).toFixed(1)}€</span>`;
+        }
+    });
 }
