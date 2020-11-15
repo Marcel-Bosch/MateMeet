@@ -8,18 +8,7 @@ export class Event {
         this.expenses = 0;
     }
 
-    addPerson(name) {
 
-        let nameSpaced = name.replace(/ /g, "_");
-        //Add to expenses people list
-        this.people.push({ name: nameSpaced });
-        insertPersonOnDom(name,nameSpaced)
-        
-        this.updatePeople();
-        if (this.people.length > 1 && this.expenses) {
-            this.updateExpenses();
-        };
-    }
 
     updatePeople() {
         document.querySelector('#total__people').innerHTML = `${this.people.length}`;

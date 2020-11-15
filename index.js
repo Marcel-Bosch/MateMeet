@@ -1,10 +1,11 @@
 
 import { Event } from "./event.js";
 import { elements } from "./elements.js";
-import { insertEventOnDom, insertExpenseOnDom } from "./view.js";
-import { addPerson } from "./manage.js";
-export let actEv, btn;
+import { insertEventOnDom, insertExpenseOnDom, insertPersonOnDom } from "./view.js";
+export let actEv;
 export const state = {};
+
+let btn;
 
 
 
@@ -68,6 +69,47 @@ function addExpense() {
         state[actEv].updateExpenses();
     });
 };
+
+// Add person 
+function addPerson () {
+    btn = elements.personBtn;
+    function addPersonName () {
+        let personName = elements.personName.value;
+        if (actEv && personName) {
+            //Check if the name is already on the list
+            let perObj = state[actEv].people.find(o => o.name == personName.replace(/ /g, "_"));
+            if (perObj) {
+                alert('This name is already on the list');
+            } else {
+                let nameSpaced = name.replace(/ /g, "_");
+                //Add to expenses people list
+                state[actEv].people.push({ name: nameSpaced });
+                insertPersonOnDom(name,nameSpaced)
+                
+                state[actEv].updatePeople();
+                if (state[actEv].people.length > 1 && state[actEv].expenses) {
+                    state[actEv].updateExpenses();
+                };
+                elements.personName.value = '';
+            };
+        } else if (!actEv) {
+            alert('No event selected!')
+        } else if (!personName) {
+            alert('Please insert a name')
+        };
+    }
+
+    elements.personName.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            addPersonName();
+        };
+    });
+    btn.addEventListener('click', function () {
+        addPersonName();
+    })
+}
+addPerson();
+
 
 //Delete person
 function deleteperson() {
