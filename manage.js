@@ -1,4 +1,4 @@
-import { Person, Event } from "./classes.js";
+import { Person, Event, Expense } from "./classes.js";
 import { elements } from "./elements.js";
 import { insertPersonOnDom, updateExpensesOnDom, insertExpenseOnDom, insertEventOnDom } from "./view.js";
 export const state = {};

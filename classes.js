@@ -21,3 +21,10 @@ export class Person {
         this.id = id;
     }
 }
+export class Expense {
+    constructor(amount,person,description){
+        this.amount = amount;
+        this.person = person;
+        this.description = description;
+    }
+}

@@ -8,6 +8,13 @@ deleteperson();
 addExpense();
 addPerson();
 
+//Menu Btn
+elements.menuBtn.addEventListener('click', () => {
+    elements.boxLeft.style.width = (elements.boxLeft.style.width === '20%' ? '2%' : '20%');
+    elements.boxMiddle.style.marginLeft = (elements.boxMiddle.style.marginLeft === '20%' ? '0%' : '20%');
+    elements.boxMiddle.style.width = (elements.boxMiddle.style.width == '60%' ? '80%' : '60%');
+    elements.buttonBox.style.opacity = (elements.buttonBox.style.opacity == '1' ? '0' : '1');
+})
 
 //New event
 function createEvent() {
