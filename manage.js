@@ -1,18 +1,18 @@
 import { Person, Event, Expense } from "./classes.js";
 import { elements } from "./elements.js";
-import { insertPersonOnDom, updateExpensesOnDom, insertExpenseOnDom, insertEventOnDom } from "./view.js";
+import { insertPersonOnDom, updateExpensesOnDom, insertExpenseOnDom, insertEventOnDom, updateTotalPeopleOnDOM, insertEventButton } from "./view.js";
 export const state = {};
 export let actEv;
 
-
 // ---- Manage Event ---- \\
 
-export function processEvent() {
+export function addEvent() {
     let eventName = elements.nameInput.value;
     let eventDate = elements.dateInput.value.split('-').reverse().toString().replace(/,/g, "/");
     if (eventName && eventDate) {
         state[eventName] = new Event(eventName, eventDate);
         insertEventOnDom(eventName, eventDate);
+        insertEventButton(eventName);
         state.actualEvent = eventName;
         actEv = state.actualEvent.toString();
         elements.nameInput.value = '';
@@ -25,10 +25,12 @@ export function processEvent() {
     }
 }
 
-
+export function changeActiveEvent(selectedEvent){
+    actEv = selectedEvent;
+}
 // ---- Manage People ---- \\
 
-export function processPersonName() {
+export function addPersonName() {
     let personName = elements.personName.value;
     let id = personName.replace(/ /g, "_");
     if (actEv && personName) {
@@ -50,13 +52,39 @@ export function processPersonName() {
 }
 function addPersonOnData(personName, id) {
     state[actEv].people.push(new Person(personName, id));
-    state[actEv].updatePeople();
+    updateTotalPeopleOnDOM();
     console.log(state);
     if (state[actEv].people.length > 1 && state[actEv].expenses) {
     };
 }
 
+export function deletePerson(e) {
+    const Id = e.target.parentNode.parentNode.id;
 
+    let confirmation = confirm(`Are you sure? All the expenses of ${Id} will also be deleted.`);
+
+    if (confirmation) {
+        //Check index of that person on the array
+        const i = (state[actEv].people.findIndex(o => o.name == Id));
+        //Remove expenses of that person
+        let exp = state[actEv].people[i].expenses;
+        state[actEv].expenses -= exp;
+        //Remove from inputs list   
+        let opt = document.getElementById(Id + '__opt');
+        opt.parentElement.removeChild(opt);
+        //Remove from Event Object 
+        state[actEv].people.splice(i, 1);
+        //Update expenses
+        updateExpensesData();
+        updateExpensesOnDom();
+        //Remove from DOM
+        const child = e.target.parentNode.parentNode;
+        document.getElementById(Id).parentElement.removeChild(child);
+        //Update the number of people
+        updateTotalPeopleOnDOM();
+    };
+
+};
 // ---- Manage Expenses ---- \\
 
 export function updateExpensesData() {
@@ -69,19 +97,19 @@ export function updateExpensesData() {
 }
 
 export function addExpenseToPerson(selectedName, expAmount, description) {
-    let perObj = state[actEv].people.find(o => o.id == selectedName);
-    if (perObj.expenses) {
-        perObj.expenses += expAmount;
+    let personOnObject = state[actEv].people.find(o => o.id == selectedName);
+    if (personOnObject.expenses) {
+        personOnObject.expenses += expAmount;
     } else {
-        perObj.expenses = expAmount;
+        personOnObject.expenses = expAmount;
     };
-    if (!perObj.expArray) {
-        perObj.expArray = [];
+    if (!personOnObject.expArray) {
+        personOnObject.expArray = [];
     };
-    perObj.expArray.push(new Expense(expAmount, selectedName, description));
+    personOnObject.expArray.push(new Expense(expAmount, selectedName, description));
 }
 
-export function processExpense() {
+export function addExpense() {
     let selectedName = elements.peopleList.value.replace(/ /g, "_");
     let expAmount = parseFloat(elements.expenseAmount.value);
     let description = elements.expenseDescription.value

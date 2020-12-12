@@ -6,11 +6,6 @@ export class Event {
         this.eachPayment = 0;
         this.expenses = 0;
     }
-
-    updatePeople() {
-        document.querySelector('#total__people').innerHTML = `${this.people.length}`;
-    }
-
 }
 export class Person {
     constructor(name, id) {

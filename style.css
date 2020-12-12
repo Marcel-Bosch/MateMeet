@@ -98,7 +98,7 @@ body {
     transition-duration: 300ms;
 }
 
-.button {
+button {
     background: none;
     width: 100%;
     font-size: 80% !important;
