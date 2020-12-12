@@ -75,7 +75,21 @@ body {
     font-size: 99%;
     list-style: none;
     margin: 1% 2%;
+    background: #2b332f;
+    border-radius: 5px;
+    /* height: 5%;
+    overflow-y: hidden; */
 }
+
+.person__header {
+    display: flex;
+}
+
+.fa-chevron-down {
+    margin-left: auto;
+    cursor: pointer;
+}
+
 
 #button__box {
     padding: 40% 0% 0% 30%;
@@ -99,15 +113,16 @@ body {
     transition-duration: 0.3s;
 }
 
-.trash{
+.trash {
     font-size: 10px;
+    margin-top: 3%;
     margin-left: 1rem;
     transition: 0.3s;
+    cursor: pointer;
 }
 
-.trash:hover{
+.trash:hover {
     font-size: 15px;
-    cursor: pointer;
 }
 
 input {
@@ -137,17 +152,24 @@ input {
     margin-left: 9px;
     color: #f26d7d;
 }
-.fa-bars{
+
+.fa-bars {
     margin: 5px;
     position: absolute;
-    top:2%;
+    top: 2%;
     left: 2%;
     z-index: 1;
     transition-duration: 0.3s;
 }
-.fa-bars:hover{
+
+.fa-bars:hover {
     rotate: 90deg;
     cursor: pointer;
     transform: rotate(90deg);
     transition-duration: 0.3s;
+}
+
+.description {
+    font-size: smaller;
+    color: rosybrown;
 }

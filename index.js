@@ -56,7 +56,8 @@ function deleteperson() {
 
     document.addEventListener('click', e => {
         if (e.target.matches('.trash')) {
-            const Id = e.target.parentNode.id;
+            const Id = e.target.parentNode.parentNode.id;
+
             let confirmation = confirm(`Are you sure you want to delete ${Id}?`);
 
             if (confirmation) {
@@ -74,7 +75,7 @@ function deleteperson() {
                 updateExpensesData();
                 updateExpensesOnDom();
                 //Remove from DOM
-                const child = e.target.parentNode;
+                const child = e.target.parentNode.parentNode;
                 document.getElementById(Id).parentElement.removeChild(child);
                 //Update the number of people
                 state[actEv].updatePeople();

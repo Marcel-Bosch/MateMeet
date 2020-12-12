@@ -19,14 +19,23 @@ export function insertPersonOnDom(name, id) {
         `<option value="${name}" id="${id}__opt">${name}</option>`);
     //Add to DOM
     elements.personCont.insertAdjacentHTML("beforeend",
-        `<div class = "person__list" id="${id}">${name}<span id="${id}__owes"></span><i class="trash fas fa-trash-alt"></i></div>`);
+        `<div class = "person__list" id="${id}">
+                <div class = "person__header">
+                    ${name}
+                    <span id="${id}__owes"></span>
+                    <i class="trash fas fa-trash-alt"></i>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+        </div>`);
 }
 
 
+
+
 // ---- Expenses ---- \\
-export function insertExpenseOnDom(selectedName, expAmount) {
+export function insertExpenseOnDom(selectedName, expAmount, description) {
     document.getElementById(`${selectedName}`).insertAdjacentHTML('beforeend',
-        `<li class="expense">-${expAmount}€</li>`);
+        `<li class="expense">-${expAmount}€ <span class="description">${description}</span></li>`);
 }
 
 export function updateExpensesOnDom() {

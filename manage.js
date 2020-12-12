@@ -60,7 +60,7 @@ function addPersonOnData(personName, id) {
 // ---- Manage Expenses ---- \\
 
 export function updateExpensesData() {
-    if(state[actEv].people.length > 0){
+    if (state[actEv].people.length > 0) {
         state[actEv].eachPayment = state[actEv].expenses / state[actEv].people.length;
         state[actEv].people.forEach(i => {
             i.payment = state[actEv].eachPayment - i.expenses;
@@ -68,7 +68,7 @@ export function updateExpensesData() {
     };
 }
 
-export function addExpenseToPerson(selectedName, expAmount) {
+export function addExpenseToPerson(selectedName, expAmount, description) {
     let perObj = state[actEv].people.find(o => o.id == selectedName);
     if (perObj.expenses) {
         perObj.expenses += expAmount;
@@ -78,23 +78,26 @@ export function addExpenseToPerson(selectedName, expAmount) {
     if (!perObj.expArray) {
         perObj.expArray = [];
     };
-    perObj.expArray.push(expAmount);
+    perObj.expArray.push(new Expense(expAmount, selectedName, description));
 }
 
 export function processExpense() {
     let selectedName = elements.peopleList.value.replace(/ /g, "_");
     let expAmount = parseFloat(elements.expenseAmount.value);
-    addExpenseToPerson(selectedName, expAmount);
-    insertExpenseOnDom(selectedName, expAmount);
+    let description = elements.expenseDescription.value
+    if (expAmount) {
+        addExpenseToPerson(selectedName, expAmount, description);
+        insertExpenseOnDom(selectedName, expAmount, description);
+        if (state[actEv].expenses) {
+            state[actEv].expenses += expAmount;
+        } else {
+            state[actEv].expenses = expAmount;
+        };
+        console.log(state[actEv]);
 
-    if (state[actEv].expenses) {
-        state[actEv].expenses += expAmount;
-    } else {
-        state[actEv].expenses = expAmount;
+        updateExpensesData();
+        updateExpensesOnDom();
+        elements.expenseAmount.value = '';
     };
-    console.log(state[actEv]);
 
-    updateExpensesData();
-    updateExpensesOnDom();
-    elements.expenseAmount.value = '';
 }
