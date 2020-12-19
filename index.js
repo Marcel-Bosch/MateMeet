@@ -5,11 +5,10 @@ import {
     addExpense,
     addEvent,
     deletePerson,
-    actEv,
     changeActiveEvent,
+    saveAll,
 } from "./manage.js";
-import { foldSidebar, renderEvent } from "./view.js";
-
+import { foldSidebar, renderEvent, updateExpensesOnDom, updateTotalPeopleOnDOM } from "./view.js";
 
 //Menu Btn
 elements.menuBtn.addEventListener('click', () => {
@@ -41,7 +40,7 @@ elements.personName.addEventListener('keypress', (e) => {
     };
 });
 
-//Icons click
+//Events click
 document.addEventListener('click', e => {
     if (e.target.matches('.trash')) {
         deletePerson(e)
@@ -49,6 +48,9 @@ document.addEventListener('click', e => {
     if (e.target.matches('.event__selector')) {
         changeActiveEvent(e.target.innerHTML);
         renderEvent();
+        updateExpensesOnDom();
+        updateTotalPeopleOnDOM();
+        saveAll();  
     }
 });
 

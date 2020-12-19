@@ -8,6 +8,7 @@ export const elements = {
     expenseDescription: document.getElementById('expense__description'),
     expenseBtn: document.getElementById('expense__btn'),
     eventBtn: document.getElementById('event__btn'),
+    eventName: document.querySelector('#event__name'),
     eventSelector: document.querySelector('.event__selector'),
     menuBtn: document.querySelector('.fa-bars'),
     nameInput: document.getElementById('name__input'),

@@ -1,14 +1,14 @@
 import { elements } from "./elements.js";
 import { state, actEv } from "./manage.js";
 
-
 // ---- Event .... \\
 export function insertEventOnDom(eventName, eventDate) {
     //Delete previous event and people
-    document.querySelector('#event__name').innerHTML = "";
-    document.querySelector('.person__container').innerHTML = "";
+    elements.eventName.innerHTML = "";
+    elements.personCont.innerHTML = "";
+    elements.peopleList.innerHTML = "";
     //Insert on dom
-    document.querySelector('#event__name').innerHTML = `<h2>${eventName.toUpperCase()}<span id="date"> (${eventDate})</span></h2>`;
+    elements.eventName.innerHTML = `<h2>${eventName.toUpperCase()}<span id="date"> (${eventDate})</span></h2>`;
     document.querySelector('#event__stats').innerHTML =
         `</br><img src="./img/cliente.svg" class="icon"> <span id="total__people">0</span>
          </br><img src="./img/efectivo.svg" class="icon"> <span class="expense" id="total__expenses">00€</span>
@@ -44,7 +44,11 @@ export function insertExpenseOnDom(selectedName, expAmount, description) {
 }
 
 export function updateExpensesOnDom() {
-    document.querySelector('#total__expenses').innerHTML = `-${state[actEv].expenses}€ (${state[actEv].eachPayment.toFixed(1)}€ each)`;
+    if (state[actEv].expenses == 0){
+        document.querySelector('#total__expenses').innerHTML = `00€`;    
+    }else{
+        document.querySelector('#total__expenses').innerHTML = `-${state[actEv].expenses}€ (${state[actEv].eachPayment.toFixed(1)}€ each)`;
+    }
 
     state[actEv].people.forEach(i => {
         let inner = document.querySelector(`#${i.id}__owes`);
