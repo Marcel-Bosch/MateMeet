@@ -105,10 +105,12 @@ export function deletePerson(e) {
 
     if (confirmation) {
         //Check index of that person on the array
-        const i = (state[actEv].people.findIndex(o => o.name == Id));
+        const i = (state[actEv].people.findIndex(person => person.id == Id));
         //Remove expenses of that person
         let exp = state[actEv].people[i].expenses;
-        state[actEv].expenses -= exp;
+        if(exp){
+            state[actEv].expenses -= exp;
+        };
         //Remove from inputs list   
         let opt = document.getElementById(Id + '__opt');
         opt.parentElement.removeChild(opt);
