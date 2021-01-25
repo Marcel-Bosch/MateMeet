@@ -74,9 +74,17 @@ export function insertPersonOnDom(name, id) {
                     ${name}
                     <span id="${id}__owes"></span>
                     <i class="trash fas fa-trash-alt"></i>
-                    <i class="fas fa-chevron-down"></i>
+                    <i class="fas fa-plus-square person__menu__open__btn"></i>
                 </div>
         </div>`);
+            }
+
+export function closePersonMenu() {
+    elements.personMenu.style.display = 'none';
+}
+
+export function openPersonMenu() {
+    elements.personMenu.style.display = 'block';
 }
 
 // ---- Fold Sidebar ---- \\

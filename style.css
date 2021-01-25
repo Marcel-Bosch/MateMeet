@@ -1,14 +1,11 @@
 body {
     color: #426696;
     font-family: 'Alata', sans-serif;
-    /* background: linear-gradient(to bottom, #6F4A80,#B176CC); */
     width: 0;
     border: 0;
     padding: 0;
     margin: 0;
 }
-
-
 
 ::-webkit-scrollbar {
     width: 0px;
@@ -45,6 +42,7 @@ body {
 
 .person__menu{
     position: absolute;
+    display: none;
     top: 20%;
     left: 30%;
     width: 40%;
@@ -53,22 +51,19 @@ body {
     background: linear-gradient(
         to right bottom, 
         rgba(255, 255, 255, 0.98),
-        rgba(255,255,255, 0.8)
+        rgba(255,255,255, 0.7)
         );
     box-shadow: 2px 2px 3px rgba(0, 0, 0,0.5);
     padding: 2%;
 }
-.fa-plus-square{
-    margin-left: 90%;
-}
 
-.menu__box__up{
+.menu__person__header{
     display: flex;
-    flex-direction: row;
 }
 
 .fa-times{
-    margin-left: 60%;
+    margin-left: auto;
+    cursor: pointer;
 }
 
 .box__right {
@@ -122,7 +117,7 @@ body {
     display: flex;
 }
 
-.fa-chevron-down {
+.fa-plus-square {
     margin-left: auto;
     cursor: pointer;
 }
@@ -152,7 +147,6 @@ button {
 
 .trash {
     font-size: 10px;
-    margin-top: 3%;
     margin-left: 1rem;
     transition: 0.3s;
     cursor: pointer;

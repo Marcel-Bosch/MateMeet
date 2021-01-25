@@ -8,7 +8,7 @@ import {
     changeActiveEvent,
     saveAll,
 } from "./manage.js";
-import { foldSidebar, renderEvent, updateExpensesOnDom, updateTotalPeopleOnDOM } from "./view.js";
+import { foldSidebar, renderEvent, updateExpensesOnDom, updateTotalPeopleOnDOM,closePersonMenu, openPersonMenu } from "./view.js";
 
 //Menu Btn
 elements.menuBtn.addEventListener('click', () => {
@@ -52,5 +52,13 @@ document.addEventListener('click', e => {
         updateTotalPeopleOnDOM();
         saveAll();  
     }
+    if(e.target.matches('.person__menu__open__btn')){
+        openPersonMenu();
+        document.getElementById('people__list').value = e.target.parentNode.parentNode.id;
+    }
 });
 
+//Close click
+elements.personMenuCloseBtn.addEventListener('click', function(){
+    closePersonMenu();
+})

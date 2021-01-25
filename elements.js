@@ -15,5 +15,8 @@ export const elements = {
     peopleList: document.getElementById('people__list'),
     personBtn: document.getElementById('person__btn'),
     personCont: document.querySelector('.person__container'),
+    personMenu: document.querySelector('.person__menu'),
+    personMenuCloseBtn: document.getElementById('person__menu__close__btn'),
+    personMenuOpenBtn: document.querySelector('.person__menu__open__btn'),
     personName: document.getElementById('person__name'),
 };
