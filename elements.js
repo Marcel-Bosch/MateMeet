@@ -1,13 +1,14 @@
 //DOM elements
 export const elements = {
     buttonBox: document.getElementById('button__box'),
-    boxLeft: document.querySelector('.box__left'),
     boxMiddle: document.querySelector('.box__middle'),
     dateInput: document.getElementById('date__input'),
     expenseAmount: document.getElementById('expense__amount'),
     expenseDescription: document.getElementById('expense__description'),
     expenseBtn: document.getElementById('expense__btn'),
     eventBtn: document.getElementById('event__btn'),
+    eventMenu: document.querySelector('.event__menu'),
+    eventMenuCloseBtn: document.getElementById('event__menu__close__btn'),
     eventName: document.querySelector('#event__name'),
     eventSelector: document.querySelector('.event__selector'),
     menuBtn: document.querySelector('.fa-bars'),

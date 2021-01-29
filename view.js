@@ -87,10 +87,18 @@ export function openPersonMenu() {
     elements.personMenu.style.display = 'block';
 }
 
-// ---- Fold Sidebar ---- \\
-export function foldSidebar() {
-    elements.boxLeft.style.width = (elements.boxLeft.style.width === '2%' ? '20%' : '2%');
-    elements.boxMiddle.style.marginLeft = (elements.boxMiddle.style.marginLeft === '0%' ? '20%' : '0%');
-    elements.boxMiddle.style.width = (elements.boxMiddle.style.width == '80%' ? '60%' : '80%');
-    elements.buttonBox.style.opacity = (elements.buttonBox.style.opacity == '0' ? '1' : '0');
+export function closeEventMenu() {
+    elements.eventMenu.style.display = 'none';
 }
+
+export function openEventMenu(){
+    elements.eventMenu.style.display = 'block';
+}
+
+// ---- Fold Sidebar ---- \\
+// export function foldSidebar() {
+//     elements.boxLeft.style.width = (elements.boxLeft.style.width === '2%' ? '20%' : '2%');
+//     elements.boxMiddle.style.marginLeft = (elements.boxMiddle.style.marginLeft === '0%' ? '20%' : '0%');
+//     elements.boxMiddle.style.width = (elements.boxMiddle.style.width == '80%' ? '60%' : '80%');
+//     elements.buttonBox.style.opacity = (elements.buttonBox.style.opacity == '0' ? '1' : '0');
+// }

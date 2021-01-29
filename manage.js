@@ -98,28 +98,38 @@ function addPersonOnData(personName, id) {
     saveAll();
 }
 
-export function deletePerson(e) {
-    const Id = e.target.parentNode.parentNode.id;
+export function findPersonById(id) {
+   const index = state[actEv].people.findIndex(o => o.id == id);
+   return index;
+}
+export function findPersonNameById(id){
+    const index = findPersonById(id);
+    const name = state[actEv].people[index].name;
+    return name;
+}
 
-    let confirmation = confirm(`Are you sure? All the expenses of ${Id} will also be deleted.`);
+export function deletePerson(e) {
+    const id = e.target.parentNode.parentNode.id;
+    //Check index of that person on object
+    const index = findPersonById(id);
+    const name = findPersonNameById(id);
+    let confirmation = confirm(`Are you sure? All the expenses of ${name} will also be deleted.`);
 
     if (confirmation) {
-        //Check index of that person on the array
-        const i = (state[actEv].people.findIndex(o => o.name == Id));
         //Remove expenses of that person
-        let exp = state[actEv].people[i].expenses;
+        let exp = state[actEv].people[index].expenses;
         state[actEv].expenses -= exp;
         //Remove from inputs list   
-        let opt = document.getElementById(Id + '__opt');
+        let opt = document.getElementById(id + '__opt');
         opt.parentElement.removeChild(opt);
         //Remove from Event Object 
-        state[actEv].people.splice(i, 1);
+        state[actEv].people.splice(index, 1);
         //Update expenses
         updateExpensesData();
         updateExpensesOnDom();
         //Remove from DOM
         const child = e.target.parentNode.parentNode;
-        document.getElementById(Id).parentElement.removeChild(child);
+        document.getElementById(id).parentElement.removeChild(child);
         //Update the number of people
         updateTotalPeopleOnDOM();
     };
@@ -155,6 +165,10 @@ export function addExpense() {
     let selectedName = elements.peopleList.value.replace(/ /g, "_");
     let expAmount = parseFloat(elements.expenseAmount.value);
     let description = elements.expenseDescription.value
+    if (expAmount<0){
+        alert('Expenses must be more than 0');
+        return;
+    }
     if (expAmount) {
         addExpenseToPerson(selectedName, expAmount, description);
         insertExpenseOnDom(selectedName, expAmount, description);

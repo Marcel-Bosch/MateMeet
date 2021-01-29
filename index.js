@@ -7,13 +7,10 @@ import {
     deletePerson,
     changeActiveEvent,
     saveAll,
+    findPersonNameById
 } from "./manage.js";
-import { foldSidebar, renderEvent, updateExpensesOnDom, updateTotalPeopleOnDOM,closePersonMenu, openPersonMenu } from "./view.js";
+import { renderEvent, updateExpensesOnDom, updateTotalPeopleOnDOM,closePersonMenu, openPersonMenu,closeEventMenu, openEventMenu } from "./view.js";
 
-//Menu Btn
-elements.menuBtn.addEventListener('click', () => {
-    foldSidebar();
-});
 
 //New event
 elements.eventBtn.addEventListener('click', function () {
@@ -29,11 +26,14 @@ elements.expenseAmount.addEventListener('keypress', (e) => {
         addExpense();
     }
 });
+elements.expenseDescription.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        addExpense();
+    }
+});
 
 //New person 
-elements.personBtn.addEventListener('click', function () {
-    addPersonName();
-});
+
 elements.personName.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         addPersonName();
@@ -54,11 +54,18 @@ document.addEventListener('click', e => {
     }
     if(e.target.matches('.person__menu__open__btn')){
         openPersonMenu();
-        document.getElementById('people__list').value = e.target.parentNode.parentNode.id;
+        const id = e.target.parentNode.parentNode.id;
+        document.getElementById('people__list').value = findPersonNameById(id);
+    }
+    if(e.target.matches('.event__menu__open__btn')){
+        openEventMenu();
     }
 });
 
 //Close click
 elements.personMenuCloseBtn.addEventListener('click', function(){
     closePersonMenu();
-})
+});
+elements.eventMenuCloseBtn.addEventListener('click', function(){
+    closeEventMenu();
+});

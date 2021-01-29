@@ -1,10 +1,10 @@
 body {
     color: #426696;
     font-family: 'Alata', sans-serif;
-    width: 0;
     border: 0;
     padding: 0;
     margin: 0;
+    
 }
 
 ::-webkit-scrollbar {
@@ -19,22 +19,14 @@ body {
     padding-right: 1%;
 }
 
-.box__left {
-    background: #60807A;
-    position: fixed;
-    width: 20%;
-    height: 100%;
-    overflow-y: scroll;
-    transition-duration: 0.3s;
-}
-
 .box__middle {
     background: linear-gradient(to right top, #65dfc9, #6cdbeb);
 
     position: fixed;
-    margin: 0 20% 0 20%;
+    margin: 2% 10% 0% 20%;
     width: 60%;
     height: 100%;
+    border-radius: 8px;
     max-height: 100%;
     overflow-y: scroll;
     transition-duration: 0.3s;
@@ -51,13 +43,30 @@ body {
     background: linear-gradient(
         to right bottom, 
         rgba(255, 255, 255, 0.98),
-        rgba(255,255,255, 0.7)
+        rgba(255,255,255, 0.9)
         );
     box-shadow: 2px 2px 3px rgba(0, 0, 0,0.5);
     padding: 2%;
 }
 
-.menu__person__header{
+.event__menu{
+    position: absolute;
+    display: none;
+    top: 20%;
+    left: 30%;
+    width: 40%;
+    height: 25%;
+    border-radius: 5px;
+    background: linear-gradient(
+        to right bottom, 
+        rgba(255, 255, 255, 0.98),
+        rgba(255,255,255, 0.9)
+        );
+    box-shadow: 2px 2px 3px rgba(0, 0, 0,0.5);
+    padding: 2%;
+}
+
+.menu__header{
     display: flex;
 }
 
@@ -71,6 +80,7 @@ body {
     margin-left: 80%;
     width: 20%;
     height: 100%;
+    padding: 1%;
 }
 
 #event__name {
@@ -86,7 +96,6 @@ body {
 .person__container {
     margin: 2% 0 0 10%;
     width: 60%;
-    height: 80%;
 }
 
 .expense {
@@ -97,6 +106,9 @@ body {
     color: #4d6753;
 }
 
+.add__person__box{
+    margin-left: 2%;
+}
 .person__list {
     max-height: 100%;
     padding: 2%;
@@ -162,14 +174,10 @@ input {
 
 .inputs {
     size: 100%;
-    background:linear-gradient(
-        to right,
-       rgba(191,255,243),
-       rgba(255,255,255,0)
-        );
+    background:rgba(230, 250, 246,0);
     width: 99%;
-    padding:3%;
-    font-size: 55%;
+    padding:1%;
+    font-size: 70%;
     color: inherit;
     border-width: 0px;
     border-radius: 5px;
